@@ -21,7 +21,7 @@ export default function Home() {
 </div>
 
 <h1 className="text-black font-bold mb-5 leading-tight text-xl sm:text-4xl md:text-3xl lg:text-4xl reveal reveal-del-3">
-  Hi, I'm{" "}
+  Hi, I&apos;m{" "}
   <span className="font-bold bg-linear-to-r from-[#5246e4] to-[#672bdb] bg-clip-text text-transparent inline-block">
     <AnimatedText text="Oguntade Razak Damilare" speed={180} />
   </span>

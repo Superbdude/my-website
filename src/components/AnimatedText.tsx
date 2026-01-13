@@ -14,18 +14,20 @@ export default function AnimatedText({ text, speed = 60, className = "" }: Props
   useEffect(() => {
     let i = 0;
     let mounted = true;
+    let timer: ReturnType<typeof setTimeout>;
     setVisible("");
 
     const tick = () => {
       if (!mounted) return;
-      setVisible((s) => text.slice(0, i + 1));
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      setVisible((_s) => text.slice(0, i + 1));
       i += 1;
       if (i < text.length) {
         timer = setTimeout(tick, speed);
       }
     };
 
-    let timer: ReturnType<typeof setTimeout> = setTimeout(tick, speed);
+    timer = setTimeout(tick, speed);
 
     return () => {
       mounted = false;

@@ -1,3 +1,4 @@
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import whatsapp from '../../../public/whatsapp.png'
 // TODO: replace with your real whatsapp number in international format (no + or leading zeros)
 const WHATSAPP_NUMBER = '+2349092413942' // example: +234**********
@@ -16,7 +17,7 @@ export default function WhatsAppBubble() {
     >
       {/* Bubble */}
       <div className="bg-[#1CCF66] text-white rounded-full py-3 px-5 shadow-lg flex items-center text-sm font-poppins max-w-[250px] truncate">
-        <span className="truncate ">Let's Talk</span>
+        <span className="truncate ">Let&apos;s Talk</span>
       </div>
 
       {/* WhatsApp round icon */}

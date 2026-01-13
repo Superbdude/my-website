@@ -4,6 +4,7 @@ import path from 'path';
 export default function About() {
   // server-side check: is avatar available in public?
   const avatarPath = path.join(process.cwd(), 'public', 'images', 'avatar.jpg');
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const hasAvatar = fs.existsSync(avatarPath);
 
   return (
@@ -34,9 +35,9 @@ export default function About() {
           <div className="lg:col-span-2 space-y-6">
             <section className="text-[#60606a] p-6 bg-white border border-[#eef0ff] rounded-2xl shadow-sm">
               <p className="mb-4 leading-relaxed">
-                Hello! I'm a passionate full-stack web developer with a love for creating
+                Hello! I&apos;m a passionate full-stack web developer with a love for creating
                 beautiful, functional web applications. With years of experience,
-                I've worked on a range of projects from small business websites to complex
+                I&apos;ve worked on a range of projects from small business websites to complex
                 enterprise applications and still working on some.
               </p>
               <p className="mb-4 leading-relaxed">
@@ -46,7 +47,7 @@ export default function About() {
                 code and creating user experiences that are intuitive and delightful.
               </p>
               <p className="leading-relaxed">
-                When I'm not coding, you can find me exploring new technologies, contributing
+                When I&apos;m not coding, you can find me exploring new technologies, contributing
                 to open-source projects, or sharing knowledge with the dev community.
               </p>
             </section>

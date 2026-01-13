@@ -50,7 +50,7 @@ export default function Contact() {
                         </div>
                     </div>
                     <h2 className="text-2xl font-bold text-center text-black mb-2">Message Sent!</h2>
-                    <p className="text-center text-gray-600 mb-6">Thank you for reaching out. I'll get back to you as soon as possible.</p>
+                    <p className="text-center text-gray-600 mb-6">Thank you for reaching out. I&apos;ll get back to you as soon as possible.</p>
                     <button
                         onClick={() => setSubmitted(false)}
                         className="w-full bg-[#5541e2] text-white py-2 rounded-lg font-semibold hover:bg-[#4735d7] transition"
@@ -88,8 +88,8 @@ export default function Contact() {
             Get In <span className="text-gradient bg-linear-to-r from-[#5246e4] to-[#672bdb] bg-clip-text text-transparent">Touch</span>
             </h1>
             <p className="text-base sm:text-lg text-muted-foreground max-w-2xl text-[#71717a] mx-auto">
-            Have a project in mind or want to collaborate? I'd love to hear from you. 
-            Fill out the form below and I'll get back to you as soon as possible.
+            Have a project in mind or want to collaborate? I&apos;d love to hear from you. 
+            Fill out the form below and I&apos;ll get back to you as soon as possible.
             </p>
         </div>
 
@@ -97,7 +97,7 @@ export default function Contact() {
         <div className="w-full flex flex-col items-start max-w-xl border p-5 rounded-xl">
             <h1 className="text-xl sm:text-2xl font-bold mb-2 text-black">Send a Message</h1>
             <p className="text-base sm:text-sm text-muted-foreground max-w-2xl text-[#71717a]">
-            Fill out the form below and I'll respond within 24 hours.
+            Fill out the form below and I&apos;ll respond within 24 hours.
             </p>
 
             <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-full mt-5">

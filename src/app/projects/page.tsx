@@ -45,7 +45,7 @@ export default function Projects() {
               My <span className="text-gradient">Projects</span>
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl">
-              A collection of projects I've worked on, showcasing my skills in web development, 
+              A collection of projects I&apos;ve worked on, showcasing my skills in web development, 
               design, and problem-solving.
             </p>
           </div>

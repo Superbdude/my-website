@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   title: "Oguntade Razak Damilare | Full-Stack Developer",
   description: "A passionate full-stack developer crafting beautiful, functional web experiences. I turn ideas into elegant solutions with clean code and modern design.",
   icons: {
-    icon: "/passp.png",
+    icon: "https://oguntade-razak.me/passp.png",
   },
   openGraph: {
     title: "Oguntade Razak Damilare | Full-Stack Developer",
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     siteName: "Oguntade Razak Damilare",
     images: [
       {
-        url: "/passp.png",
+        url: "https://oguntade-razak.me/passp.png",
         width: 1200,
         height: 1200,
         alt: "Oguntade Razak Damilare - Full-Stack Developer",
@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Oguntade Razak Damilare | Full-Stack Developer",
     description: "A passionate full-stack developer crafting beautiful, functional web experiences. I turn ideas into elegant solutions with clean code and modern design.",
-    images: ["/passp.png"],
+    images: ["https://oguntade-razak.me/passp.png"],
   },
   viewport: {
     width: "device-width",

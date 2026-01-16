@@ -59,24 +59,27 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
   const [project, setProject] = useState<Project | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(false);
-  const [slug, setSlug] = useState<string>('');
 
   useEffect(() => {
-    // Unwrap the params Promise
-    Promise.resolve(params).then((resolvedParams) => {
-      setSlug(resolvedParams.slug);
-    });
-  }, [params]);
-
-  useEffect(() => {
-    if (!slug) return;
-
     const fetchProject = async () => {
       try {
+        setLoading(true);
+        // Unwrap the params Promise
+        const resolvedParams = await params;
+        const slug = resolvedParams.slug;
+        
         const response = await fetch('/data/projects.json');
+        if (!response.ok) throw new Error('Failed to fetch projects');
+        
         const projects: Project[] = await response.json();
-        const foundProject = projects.find(p => p.slug === slug) || null;
-        setProject(foundProject);
+        const foundProject = projects.find(p => p.slug === slug);
+        
+        if (!foundProject) {
+          console.error(`Project not found for slug: ${slug}`);
+          console.log('Available slugs:', projects.map(p => p.slug));
+          setError(true);
+        }
+        setProject(foundProject || null);
       } catch (err) {
         console.error('Error fetching project:', err);
         setError(true);
@@ -86,7 +89,7 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
     };
 
     fetchProject();
-  }, [slug]);
+  }, [params]);
 
   if (loading) {
     return (

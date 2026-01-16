@@ -1,6 +1,6 @@
-import fs from 'fs';
-import path from 'path';
-import { notFound } from "next/navigation";
+"use client";
+
+import { useEffect, useState } from 'react';
 import { Code2, Database, Zap, Palette, GitBranch, Globe, Cpu } from 'lucide-react';
 import { Project } from '../../../types';
 
@@ -55,28 +55,51 @@ function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?:
   );
 }
 
-// Read project from JSON file in public so it's aligned with client fetch('/data/projects.json')
-async function getProject(slug: string): Promise<Project | null> {
-  const dataDir = path.join(process.cwd(), 'public', 'data');
-  const filePath = path.join(dataDir, 'projects.json');
+export default function ProjectPage({ params }: { params: { slug: string } }) {
+  const [project, setProject] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
 
-  try {
-    const fileContent = fs.readFileSync(filePath, 'utf8');
-    const projects: Project[] = JSON.parse(fileContent);
-    return projects.find(p => p.slug === slug) || null;
-  } catch (error) {
-    console.error('Error reading projects:', error);
-    return null;
+  useEffect(() => {
+    const fetchProject = async () => {
+      try {
+        const response = await fetch('/data/projects.json');
+        const projects: Project[] = await response.json();
+        const foundProject = projects.find(p => p.slug === params.slug) || null;
+        setProject(foundProject);
+      } catch (err) {
+        console.error('Error fetching project:', err);
+        setError(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProject();
+  }, [params.slug]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-white text-black pt-24 px-6 lg:px-20 pb-20">
+        <div className="text-center py-20">
+          <div className="inline-block">
+            <div className="w-8 h-8 border-4 border-[#5246e4]/20 border-t-[#5246e4] rounded-full animate-spin"></div>
+          </div>
+        </div>
+      </div>
+    );
   }
-}
 
-export default async function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
-  // Unwrap params Promise
-  const { slug } = await params;
-  
-  const project = await getProject(slug);
-
-  if (!project) return notFound();
+  if (error || !project) {
+    return (
+      <div className="min-h-screen bg-white text-black pt-24 px-6 lg:px-20 pb-20">
+        <div className="text-center py-20">
+          <h1 className="text-2xl font-bold text-red-600 mb-4">Project Not Found</h1>
+          <p className="text-gray-600">The requested project could not be found.</p>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen bg-white text-black pt-24 px-6 lg:px-20 pb-20">

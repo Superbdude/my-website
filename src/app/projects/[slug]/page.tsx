@@ -66,10 +66,18 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             preload="metadata"
             onError={(e) => {
               console.error('Video failed to load:', project.video, e);
+              // Fallback to screenshot if video fails
+              const videoElement = e.target as HTMLVideoElement;
+              videoElement.style.display = 'none';
+              const fallbackImg = document.createElement('img');
+              fallbackImg.src = project.screenshot || '';
+              fallbackImg.alt = `${project.title} screenshot`;
+              fallbackImg.className = 'w-full h-[300px] md:h-[420px] object-cover rounded-xl';
+              videoElement.parentElement?.appendChild(fallbackImg);
             }}
           >
+            <source src={project.video.replace('.mov', '.mp4')} type="video/mp4" />
             <source src={project.video} type="video/quicktime" />
-            <source src={project.video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>

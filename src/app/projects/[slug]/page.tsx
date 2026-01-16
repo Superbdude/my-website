@@ -56,14 +56,19 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {project.video ? (
         <div className="w-full mb-10">
           <video
-            src={project.video}
-            controls
+            key={project.video}
             autoPlay
             muted
             loop
+            controls
             className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
             poster={project.screenshot}
-          />
+            preload="metadata"
+          >
+            <source src={project.video} type="video/mp4" />
+            <source src={project.video} type="video/quicktime" />
+            Your browser does not support the video tag.
+          </video>
         </div>
       ) : project.screenshot ? (
         <div className="mb-10">

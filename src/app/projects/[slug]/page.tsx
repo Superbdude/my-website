@@ -126,10 +126,14 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
       <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
       <p className="text-lg text-[#71717a] mb-10">{project.description}</p>
 
-      {/* Project Video */}
-      {project.video && (
+      {/* Project Screenshot */}
+      {project.screenshot && (
         <div className="mb-10">
-          <VideoPlayer video={project.video} screenshot={project.screenshot} title={project.title} />
+          <img
+            src={project.screenshot}
+            alt={`${project.title} screenshot`}
+            className="w-full h-[300px] md:h-[420px] object-cover rounded-xl"
+          />
         </div>
       )}
 

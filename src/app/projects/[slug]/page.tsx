@@ -24,6 +24,37 @@ const techIcons: { [key: string]: React.ReactNode } = {
   "Render": <Cpu size={16} className="text-[#000] animate-icon-spin-fast" />,
 };
 
+// Video component with autoplay handling
+function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?: string; title: string }) {
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      controls
+      playsInline
+      className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
+      poster={screenshot}
+      preload="metadata"
+      onError={(e) => {
+        console.error('Video failed to load:', video, e);
+        // Fallback to screenshot if video fails
+        const videoElement = e.target as HTMLVideoElement;
+        videoElement.style.display = 'none';
+        const fallbackImg = document.createElement('img');
+        fallbackImg.src = screenshot || '';
+        fallbackImg.alt = `${title} screenshot`;
+        fallbackImg.className = 'w-full h-[300px] md:h-[420px] object-cover rounded-xl';
+        videoElement.parentElement?.appendChild(fallbackImg);
+      }}
+    >
+      <source src={video.replace('.mov', '.mp4')} type="video/mp4" />
+      <source src={video} type="video/quicktime" />
+      Your browser does not support the video tag.
+    </video>
+  );
+}
+
 // Read project from JSON file in public so it's aligned with client fetch('/data/projects.json')
 async function getProject(slug: string): Promise<Project | null> {
   const dataDir = path.join(process.cwd(), 'public', 'data');
@@ -55,31 +86,7 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {/* Video / Screenshot */}
       {project.video ? (
         <div className="w-full mb-10">
-          <video
-            autoPlay
-            muted
-            loop
-            controls
-            playsInline
-            className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
-            poster={project.screenshot}
-            preload="metadata"
-            onError={(e) => {
-              console.error('Video failed to load:', project.video, e);
-              // Fallback to screenshot if video fails
-              const videoElement = e.target as HTMLVideoElement;
-              videoElement.style.display = 'none';
-              const fallbackImg = document.createElement('img');
-              fallbackImg.src = project.screenshot || '';
-              fallbackImg.alt = `${project.title} screenshot`;
-              fallbackImg.className = 'w-full h-[300px] md:h-[420px] object-cover rounded-xl';
-              videoElement.parentElement?.appendChild(fallbackImg);
-            }}
-          >
-            <source src={project.video.replace('.mov', '.mp4')} type="video/mp4" />
-            <source src={project.video} type="video/quicktime" />
-            Your browser does not support the video tag.
-          </video>
+          <VideoPlayer video={project.video} screenshot={project.screenshot} title={project.title} />
         </div>
       ) : project.screenshot ? (
         <div className="mb-10">

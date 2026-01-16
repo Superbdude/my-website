@@ -3,7 +3,7 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation";
 import { useState } from "react";
-import { Menu, X, Home, User, Briefcase, Mail } from "lucide-react";
+import { Menu, X, Home, User, Briefcase, Mail, Download } from "lucide-react";
 
 export default function Navigation() {
   const pathname = usePathname()
@@ -75,15 +75,27 @@ export default function Navigation() {
           })}
         </div>
 
-        {/* CTA Button */}
-        <Link
-          href="/contact"
-          className="hidden md:flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#5049e5] to-[#672bdb] text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-[#5049e5]/30 transition-all duration-300 border border-[#5049e5]/20 group relative overflow-hidden"
-        >
-          <Mail size={18} className="transition-all duration-300 group-hover:scale-110 filter drop-shadow-sm animate-icon-spin-fast" style={{ color: "#fbbf24" }} />
-          <span>Say Hello</span>
-          <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out pointer-events-none"></div>
-        </Link>
+        {/* CTA Button and CV Download */}
+        <div className="hidden md:flex items-center gap-3">
+          <Link
+            href="/contact"
+            className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#5049e5] to-[#672bdb] text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-[#5049e5]/30 transition-all duration-300 border border-[#5049e5]/20 group relative overflow-hidden"
+          >
+            <Mail size={18} className="transition-all duration-300 group-hover:scale-110 filter drop-shadow-sm animate-icon-spin-fast" style={{ color: "#fbbf24" }} />
+            <span>Say Hello</span>
+            <div className="absolute inset-0 bg-white/10 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out pointer-events-none"></div>
+          </Link>
+
+          <a
+            href="/certificates/cv.pdf"
+            download="Oguntade-Razak-CV.pdf"
+            className="flex items-center gap-2 px-6 py-2.5 bg-gradient-to-r from-[#5246e4]/20 to-[#672bdb]/20 text-[#5246e4] rounded-lg font-semibold hover:shadow-lg hover:shadow-[#5246e4]/20 transition-all duration-300 border border-[#5246e4]/30 group relative overflow-hidden hover:bg-gradient-to-r hover:from-[#5246e4]/30 hover:to-[#672bdb]/30"
+          >
+            <Download size={18} className="transition-all duration-300 group-hover:scale-110 filter drop-shadow-sm animate-icon-spin-fast" style={{ color: "#5246e4" }} />
+            <span>Download CV</span>
+            <div className="absolute inset-0 bg-white/5 -translate-x-full group-hover:translate-x-full transition-transform duration-500 ease-in-out pointer-events-none"></div>
+          </a>
+        </div>
 
         {/* Mobile Menu */}
         <div
@@ -119,6 +131,20 @@ export default function Navigation() {
                 </Link>
               );
             })}
+            <a
+              href="/certificates/cv.pdf"
+              download="Oguntade-Razak-CV.pdf"
+              className="w-full px-4 py-3 rounded-lg font-semibold transition-all duration-300 transform hover:translate-x-1 flex items-center gap-2 text-[#71717a] hover:text-[#5c39e0] hover:bg-gradient-to-r hover:from-[#5246e4]/10 hover:to-transparent"
+              onClick={() => setOpen(false)}
+              style={{
+                transitionDelay: open ? `${navItems.length * 50}ms` : "0ms",
+                transform: open ? "translateX(0)" : "translateX(-8px)",
+                opacity: open ? 1 : 0
+              }}
+            >
+              <Download size={16} style={{ color: "#5246e4" }} className="animate-icon-spin-fast" />
+              Download CV
+            </a>
           </div>
         </div>
       </nav>

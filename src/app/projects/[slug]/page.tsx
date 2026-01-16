@@ -24,6 +24,42 @@ const techIcons: { [key: string]: React.ReactNode } = {
   "Render": <Cpu size={16} className="text-[#000] animate-icon-spin-fast" />,
 };
 
+// Video component with autoplay handling
+function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?: string; title: string }) {
+  const [videoError, setVideoError] = useState(false);
+
+  if (videoError && screenshot) {
+    return (
+      <img
+        src={screenshot}
+        alt={`${title} screenshot`}
+        className="w-full h-[300px] md:h-[420px] object-cover rounded-xl"
+      />
+    );
+  }
+
+  return (
+    <video
+      autoPlay
+      muted
+      loop
+      controls
+      playsInline
+      className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
+      poster={screenshot}
+      preload="metadata"
+      onError={(e) => {
+        console.error('Video failed to load:', video, e);
+        setVideoError(true);
+      }}
+    >
+      <source src={video} type="video/quicktime" />
+      <source src={video} type="video/mp4" />
+      Your browser does not support the video tag.
+    </video>
+  );
+}
+
 
 
 export default function ProjectPage({ params }: { params: Promise<{ slug: string }> }) {
@@ -90,8 +126,12 @@ export default function ProjectPage({ params }: { params: Promise<{ slug: string
       <h1 className="text-4xl font-bold mb-6">{project.title}</h1>
       <p className="text-lg text-[#71717a] mb-10">{project.description}</p>
 
-      {/* Project Screenshot */}
-      {project.screenshot ? (
+      {/* Project Video or Screenshot */}
+      {project.video ? (
+        <div className="mb-10">
+          <VideoPlayer video={project.video} screenshot={project.screenshot} title={project.title} />
+        </div>
+      ) : project.screenshot ? (
         <div className="mb-10">
           <img
             src={project.screenshot}

@@ -1,5 +1,4 @@
 [
-  
   {
     "slug": "dohub-task-management-app",
     "title": "Task Management App",
@@ -8,7 +7,6 @@
     "github": "https://github.com/Superbdude/dohub-fullsatck-task-mgt.git",
     "live": "https://dohub-mgt.web.app",
     "screenshot": "/dohub-view.png",
-    "video": "/videos/dohub-video.mov",
     "features": [
       "Team collaboration",
       "Real-time sync",
@@ -24,7 +22,6 @@
     "github": "https://github.com/Superbdude/FakeStore",
     "live": "https://fakes-ecommerce.web.app",
     "screenshot": "/ecommerce-view.png",
-    "video": "/videos/ecommerce-video.mov",
     "features": [
       "Product catalog with filters",
       "Secure cart & checkout",
@@ -41,7 +38,6 @@
     "github": "https://github.com/placeholder/portfolio",
     "live": "https://oguntade-razak.me",
     "screenshot": "/portfolio-view.png",
-    "video": "/videos/portfolio-video.mov",
     "features": [
       "Dark mode",
       "Smooth scroll animations",
@@ -57,7 +53,6 @@
     "github": "https://github.com/Superbdude/hydro360",
     "live": "https://hydrology360.web.app/",
     "screenshot": "/hydro-view.png",
-    "video": "/videos/hydro-video.mov",
     "features": [
       "Real-time monitoring",
       "Automated alerts",
@@ -74,7 +69,6 @@
     "github": "https://github.com/Superbdude/flinkserve.git",
     "live": "https://flinkserve.web.app",
     "screenshot": "/service-view.png",
-    "video": "/videos/service-video.mov",
     "features": [
       "Local storage fallback",
       "Service listing",
@@ -83,23 +77,21 @@
     "tech": ["React", "Firebase", "Node.js", "MongoDB"]
   },
   {
-  "slug": "zeplus-academy",
-  "title": "ZePlus Academy Website",
-  "description": "ZePlus Academy provides high-quality tech education through hands-on courses, expert instructors, and a structured learning path for beginners and professionals.",
-  "tags": ["React", "TypeScript", "TailwindCSS"],
-  "github": "https://github.com/placeholder/zeplus-academy",
-  "live": "https://zeplus-lag.web.app",
-  "screenshot": "/zeplus-view.png",
-  "video": "/videos/zeplus-video.mov",
-  "features": [
-    "Full course catalog with filtering",
-    "Instructor and team profiles",
-    "Responsive, modern UI built with Tailwind",
-    "Student testimonials and success stories",
-    "Blog and learning resources",
-    "Contact and enrollment forms"
-  ],
-  "tech": ["React", "TypeScript", "TailwindCSS", "Framer Motion"]
-}
-
+    "slug": "zeplus-academy",
+    "title": "ZePlus Academy Website",
+    "description": "ZePlus Academy provides high-quality tech education through hands-on courses, expert instructors, and a structured learning path for beginners and professionals.",
+    "tags": ["React", "TypeScript", "TailwindCSS"],
+    "github": "https://github.com/placeholder/zeplus-academy",
+    "live": "https://zeplus-lag.web.app",
+    "screenshot": "/zeplus-view.png",
+    "features": [
+      "Full course catalog with filtering",
+      "Instructor and team profiles",
+      "Responsive, modern UI built with Tailwind",
+      "Student testimonials and success stories",
+      "Blog and learning resources",
+      "Contact and enrollment forms"
+    ],
+    "tech": ["React", "TypeScript", "TailwindCSS", "Framer Motion"]
+  }
 ]

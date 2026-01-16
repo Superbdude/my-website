@@ -56,17 +56,20 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
       {project.video ? (
         <div className="w-full mb-10">
           <video
-            key={project.video}
             autoPlay
             muted
             loop
             controls
+            playsInline
             className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
             poster={project.screenshot}
             preload="metadata"
+            onError={(e) => {
+              console.error('Video failed to load:', project.video, e);
+            }}
           >
-            <source src={project.video} type="video/mp4" />
             <source src={project.video} type="video/quicktime" />
+            <source src={project.video} type="video/mp4" />
             Your browser does not support the video tag.
           </video>
         </div>

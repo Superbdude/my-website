@@ -58,6 +58,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
           <video
             src={project.video}
             controls
+            autoPlay
+            muted
+            loop
             className="w-full h-[300px] md:h-[420px] object-cover rounded-xl bg-black"
             poster={project.screenshot}
           />

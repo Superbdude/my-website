@@ -176,6 +176,38 @@ export default function About() {
               </div>
             </section>
 
+            {/* CV Section */}
+            <section className="scale-in fade-in" style={{ animationDelay: "0.45s" }}>
+              <div className="flex items-center gap-3 mb-4">
+                <Briefcase className="text-[#5246e4] animate-icon-spin" size={24} />
+                <h2 className="text-black font-bold text-xl">My CV</h2>
+              </div>
+              <div className="premium-card p-8 text-center hover-lift">
+                {/* PDF Icon */}
+                <div className="w-24 h-24 flex items-center justify-center bg-gradient-to-br from-[#5246e4]/10 to-[#672bdb]/10 rounded-2xl border border-[#5246e4]/20 mx-auto mb-4">
+                  <span className="text-[#5246e4] font-bold text-4xl">PDF</span>
+                </div>
+
+                <h3 className="text-black font-semibold text-lg mb-2">
+                  Oguntade Razak Damilare
+                </h3>
+
+                <p className="text-[#71717a] text-sm mb-6">
+                  Full-Stack Developer
+                </p>
+
+                {/* Button to open PDF */}
+                <a
+                  href="/certificates/cv.pdf"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-[#5246e4] to-[#672bdb] text-white rounded-lg font-semibold hover:shadow-lg hover:shadow-[#5246e4]/30 transition-all duration-300"
+                >
+                  View CV
+                </a>
+              </div>
+            </section>
+
           </div>
 
           {/* Sidebar: Skills */}

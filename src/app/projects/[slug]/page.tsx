@@ -48,8 +48,7 @@ function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?:
         videoElement.parentElement?.appendChild(fallbackImg);
       }}
     >
-      <source src={video.replace('.mov', '.mp4')} type="video/mp4" />
-      <source src={video} type="video/quicktime" />
+      <source src={video} type="video/mp4" />
       Your browser does not support the video tag.
     </video>
   );

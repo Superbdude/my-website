@@ -1,7 +1,28 @@
 import fs from 'fs';
 import path from 'path';
 import { notFound } from "next/navigation";
+import { Code2, Database, Zap, Palette, GitBranch, Globe, Cpu } from 'lucide-react';
 import { Project } from '../../../types';
+
+// Tech icon mapping
+const techIcons: { [key: string]: React.ReactNode } = {
+  "React": <Code2 size={16} className="text-[#61dafb] animate-icon-spin-fast" />,
+  "TypeScript": <Code2 size={16} className="text-[#3178c6] animate-icon-spin-fast" />,
+  "Next.js": <Zap size={16} className="text-[#000] animate-icon-spin-fast" />,
+  "Node.js": <Globe size={16} className="text-[#339933] animate-icon-spin-fast" />,
+  "Express": <Code2 size={16} className="text-[#000] animate-icon-spin-fast" />,
+  "MongoDB": <Database size={16} className="text-[#13aa52] animate-icon-spin-fast" />,
+  "Firebase": <Database size={16} className="text-[#ffa726] animate-icon-spin-fast" />,
+  "Redux": <Palette size={16} className="text-[#764abc] animate-icon-spin-fast" />,
+  "Tailwind": <Palette size={16} className="text-[#06b6d4] animate-icon-spin-fast" />,
+  "TailwindCSS": <Palette size={16} className="text-[#06b6d4] animate-icon-spin-fast" />,
+  "Git": <GitBranch size={16} className="text-[#f34f29] animate-icon-spin-fast" />,
+  "JavaScript": <Code2 size={16} className="text-[#f7df1e] animate-icon-spin-fast" />,
+  "HTML": <Code2 size={16} className="text-[#e34c26] animate-icon-spin-fast" />,
+  "CSS": <Palette size={16} className="text-[#563d7c] animate-icon-spin-fast" />,
+  "MongoDb": <Database size={16} className="text-[#13aa52] animate-icon-spin-fast" />,
+  "Render": <Cpu size={16} className="text-[#000] animate-icon-spin-fast" />,
+};
 
 // Read project from JSON file in public so it's aligned with client fetch('/data/projects.json')
 async function getProject(slug: string): Promise<Project | null> {
@@ -99,8 +120,9 @@ export default async function ProjectPage({ params }: { params: Promise<{ slug: 
             {project.tech.map((t: string, i: number) => (
               <span
                 key={i}
-                className="text-xs bg-[#f4f4f5] text-[#3f3f46] px-3 py-1 rounded-lg"
+                className="text-xs bg-[#5246e4]/10 text-[#5246e4] px-3 py-1.5 rounded-lg border border-[#5246e4]/20 hover:border-[#5246e4]/40 transition-colors flex items-center gap-1.5 font-medium"
               >
+                {techIcons[t] || <Code2 size={16} />}
                 {t}
               </span>
             ))}

@@ -2,8 +2,28 @@
 
 import { useState, useEffect } from 'react';
 import Image from 'next/image';
-import { ExternalLink, Github, Sparkles } from 'lucide-react';
+import { ExternalLink, Github, Sparkles, Code2, Database, Zap, Palette, GitBranch, Globe, Cpu } from 'lucide-react';
 import { Project } from '../../types';
+
+// Tech icon mapping
+const techIcons: { [key: string]: React.ReactNode } = {
+  "React": <Code2 size={16} className="text-[#61dafb] animate-icon-spin-fast" />,
+  "TypeScript": <Code2 size={16} className="text-[#3178c6] animate-icon-spin-fast" />,
+  "Next.js": <Zap size={16} className="text-[#000] animate-icon-spin-fast" />,
+  "Node.js": <Globe size={16} className="text-[#339933] animate-icon-spin-fast" />,
+  "Express": <Code2 size={16} className="text-[#000] animate-icon-spin-fast" />,
+  "MongoDB": <Database size={16} className="text-[#13aa52] animate-icon-spin-fast" />,
+  "Firebase": <Database size={16} className="text-[#ffa726] animate-icon-spin-fast" />,
+  "Redux": <Palette size={16} className="text-[#764abc] animate-icon-spin-fast" />,
+  "Tailwind": <Palette size={16} className="text-[#06b6d4] animate-icon-spin-fast" />,
+  "TailwindCSS": <Palette size={16} className="text-[#06b6d4] animate-icon-spin-fast" />,
+  "Git": <GitBranch size={16} className="text-[#f34f29] animate-icon-spin-fast" />,
+  "JavaScript": <Code2 size={16} className="text-[#f7df1e] animate-icon-spin-fast" />,
+  "HTML": <Code2 size={16} className="text-[#e34c26] animate-icon-spin-fast" />,
+  "CSS": <Palette size={16} className="text-[#563d7c] animate-icon-spin-fast" />,
+  "MongoDb": <Database size={16} className="text-[#13aa52] animate-icon-spin-fast" />,
+  "Render": <Cpu size={16} className="text-[#000] animate-icon-spin-fast" />,
+};
 
 export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
@@ -48,7 +68,7 @@ export default function Projects() {
           {/* Header Section */}
           <div className="mb-16 fade-in">
             <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-[#5541e2]/10 text-[#5541e2] text-sm font-bold mb-6 border border-[#5541e2]/20 hover:border-[#5541e2]/40 transition-colors">
-              <Sparkles size={16} />
+              <Sparkles size={16} className="animate-icon-spin-fast" />
               <span>Featured Work</span>
             </div>
             
@@ -71,7 +91,7 @@ export default function Projects() {
               >
                 {/* Project Screenshot */}
                 {project.screenshot && (
-                  <div className="mb-6 relative overflow-hidden rounded-lg h-40 md:h-48">
+                  <div className="mb-6 relative overflow-hidden rounded-lg h-40 md:h-48 -m-6 mb-6">
                     <Image
                       src={project.screenshot}
                       alt={project.title}
@@ -83,65 +103,69 @@ export default function Projects() {
                   </div>
                 )}
 
-                {/* Project Title */}
-                <h3 className="text-xl font-bold text-[#111] mb-3 group-hover:text-[#5246e4] transition-colors">
-                  {project.title}
-                </h3>
+                {/* Main content area with proper padding */}
+                <div className="p-6">
+                  {/* Project Title */}
+                  <h3 className="text-xl font-bold text-[#111] mb-3 group-hover:text-[#5246e4] transition-colors">
+                    {project.title}
+                  </h3>
 
-                {/* Project Description */}
-                <p className="text-sm text-[#71717a] mb-4 leading-relaxed flex-grow">
-                  {project.description}
-                </p>
+                  {/* Project Description */}
+                  <p className="text-sm text-[#71717a] mb-4 leading-relaxed flex-grow">
+                    {project.description}
+                  </p>
 
-                {/* Tech Tags */}
-                <div className="flex flex-wrap gap-2 mb-5">
-                  {project.tags.slice(0, 3).map((tag: string, i: number) => (
-                    <span
-                      key={i}
-                      className="text-xs bg-[#5246e4]/10 text-[#5246e4] px-3 py-1.5 rounded-lg font-medium border border-[#5246e4]/20 hover:border-[#5246e4]/40 transition-colors"
-                    >
-                      {tag}
-                    </span>
-                  ))}
-                  {project.tags.length > 3 && (
-                    <span className="text-xs bg-[#5246e4]/10 text-[#5246e4] px-3 py-1.5 rounded-lg font-medium">
-                      +{project.tags.length - 3}
-                    </span>
-                  )}
-                </div>
+                  {/* Tech Tags */}
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {project.tags.slice(0, 3).map((tag: string, i: number) => (
+                      <span
+                        key={i}
+                        className="text-xs bg-[#5246e4]/10 text-[#5246e4] px-3 py-1.5 rounded-lg font-medium border border-[#5246e4]/20 hover:border-[#5246e4]/40 transition-colors flex items-center gap-1.5"
+                      >
+                        {techIcons[tag] || <Code2 size={16} />}
+                        {tag}
+                      </span>
+                    ))}
+                    {project.tags.length > 3 && (
+                      <span className="text-xs bg-[#5246e4]/10 text-[#5246e4] px-3 py-1.5 rounded-lg font-medium">
+                        +{project.tags.length - 3}
+                      </span>
+                    )}
+                  </div>
 
-                {/* Action Links */}
-                <div className="flex gap-3 pt-4 border-t border-[#5246e4]/10">
-                  <a
-                    href={`/projects/${project.slug}`}
-                    className="flex-1 inline-flex items-center justify-center gap-2 text-sm font-semibold text-[#5541e2] hover:text-[#5246e4] hover:bg-[#5246e4]/5 py-2 rounded-lg transition-all duration-300"
-                  >
-                    View Details
-                  </a>
-                  
-                  {project.github && (
+                  {/* Action Links */}
+                  <div className="flex gap-3 pt-4 border-t border-[#5246e4]/10">
                     <a
-                      href={project.github}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 text-[#5541e2] hover:bg-[#5246e4]/10 rounded-lg transition-all duration-300"
-                      title="GitHub Repository"
+                      href={`/projects/${project.slug}`}
+                      className="flex-1 inline-flex items-center justify-center gap-2 text-sm font-semibold text-[#5541e2] hover:text-[#5246e4] hover:bg-[#5246e4]/5 py-2 rounded-lg transition-all duration-300"
                     >
-                      <Github size={18} />
+                      View Details
                     </a>
-                  )}
-                  
-                  {project.live && (
-                    <a
-                      href={project.live}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="flex items-center justify-center w-10 h-10 text-[#5541e2] hover:bg-[#5246e4]/10 rounded-lg transition-all duration-300"
-                      title="Live Preview"
-                    >
-                      <ExternalLink size={18} />
-                    </a>
-                  )}
+                    
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-10 h-10 text-[#5541e2] hover:bg-[#5246e4]/10 rounded-lg transition-all duration-300"
+                        title="GitHub Repository"
+                      >
+                        <Github size={18} />
+                      </a>
+                    )}
+                    
+                    {project.live && (
+                      <a
+                        href={project.live}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center w-10 h-10 text-[#5541e2] hover:bg-[#5246e4]/10 rounded-lg transition-all duration-300"
+                        title="Live Preview"
+                      >
+                        <ExternalLink size={18} />
+                      </a>
+                    )}
+                  </div>
                 </div>
               </div>
             ))}

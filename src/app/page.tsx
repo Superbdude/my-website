@@ -17,10 +17,10 @@ export default function Home() {
         <div className="flex justify-center mb-8 reveal reveal-del-2">
           <div className="relative group">
             <div
-              className="relative flex items-center justify-center scale-in"
+              className="relative flex items-center justify-center scale-in max-w-xs"
               style={{ animationDelay: "0.1s" }}
             >
-              <img src="/emoji.png" alt="Profile emoji" className="w-62 h-auto object-contain" />
+              <img src="/emoji.png" alt="Profile emoji" className="w-full h-auto object-contain" />
             </div>
           </div>
         </div>

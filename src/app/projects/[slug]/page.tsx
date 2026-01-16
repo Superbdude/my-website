@@ -26,6 +26,18 @@ const techIcons: { [key: string]: React.ReactNode } = {
 
 // Video component with autoplay handling
 function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?: string; title: string }) {
+  const [videoError, setVideoError] = useState(false);
+
+  if (videoError && screenshot) {
+    return (
+      <img
+        src={screenshot}
+        alt={`${title} screenshot`}
+        className="w-full h-[300px] md:h-[420px] object-cover rounded-xl"
+      />
+    );
+  }
+
   return (
     <video
       autoPlay
@@ -38,16 +50,10 @@ function VideoPlayer({ video, screenshot, title }: { video: string; screenshot?:
       preload="metadata"
       onError={(e) => {
         console.error('Video failed to load:', video, e);
-        // Fallback to screenshot if video fails
-        const videoElement = e.target as HTMLVideoElement;
-        videoElement.style.display = 'none';
-        const fallbackImg = document.createElement('img');
-        fallbackImg.src = screenshot || '';
-        fallbackImg.alt = `${title} screenshot`;
-        fallbackImg.className = 'w-full h-[300px] md:h-[420px] object-cover rounded-xl';
-        videoElement.parentElement?.appendChild(fallbackImg);
+        setVideoError(true);
       }}
     >
+      <source src={video} type="video/quicktime" />
       <source src={video} type="video/mp4" />
       Your browser does not support the video tag.
     </video>

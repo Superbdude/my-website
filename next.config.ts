@@ -13,7 +13,11 @@ const nextConfig: NextConfig = {
           },
           {
             key: 'Content-Type',
-            value: 'video/mp4',
+            value: 'video/quicktime',
+          },
+          {
+            key: 'Accept-Ranges',
+            value: 'bytes',
           },
         ],
       },

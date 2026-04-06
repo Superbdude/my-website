@@ -1,5 +1,10 @@
-import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
 import { NextRequest, NextResponse } from 'next/server';
+
+export const runtime = 'nodejs';
+export const dynamic = 'force-dynamic';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
 
 export async function POST(request: NextRequest) {
   try {
@@ -13,18 +18,19 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create a transporter using Gmail
-    const transporter = nodemailer.createTransport({
-      service: 'gmail',
-      auth: {
-        user: process.env.EMAIL_USER,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
+    if (!process.env.RESEND_API_KEY) {
+      return NextResponse.json(
+        {
+          error:
+            'Email service is not configured on the server. Please set RESEND_API_KEY.',
+        },
+        { status: 500 }
+      );
+    }
 
-    // Email to you
-    const mailToYou = {
-      from: process.env.EMAIL_USER,
+    // Send contact notification email to you
+    await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>',
       to: 'oguntaderasaq30@gmail.com',
       subject: `Website contact from ${name}`,
       html: `
@@ -34,11 +40,11 @@ export async function POST(request: NextRequest) {
         <p><strong>Message:</strong></p>
         <p>${message.replace(/\n/g, '<br>')}</p>
       `,
-    };
+    });
 
-    // Confirmation email to user
-    const mailToUser = {
-      from: process.env.EMAIL_USER,
+    // Send confirmation email to user
+    await resend.emails.send({
+      from: 'Contact Form <onboarding@resend.dev>',
       to: email,
       subject: 'We received your message',
       html: `
@@ -47,11 +53,7 @@ export async function POST(request: NextRequest) {
         <p>We received your message and will get back to you as soon as possible.</p>
         <p>Best regards,<br>Oguntade Razak</p>
       `,
-    };
-
-    // Send both emails
-    await transporter.sendMail(mailToYou);
-    await transporter.sendMail(mailToUser);
+    });
 
     return NextResponse.json(
       { message: 'Email sent successfully' },
@@ -59,8 +61,10 @@ export async function POST(request: NextRequest) {
     );
   } catch (error) {
     console.error('Error sending email:', error);
+
+    const message = error instanceof Error ? error.message : 'Failed to send email';
     return NextResponse.json(
-      { error: 'Failed to send email' },
+      { error: message },
       { status: 500 }
     );
   }

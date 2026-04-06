@@ -31,7 +31,8 @@ export default function Contact() {
                 setMessage('');
                 setTimeout(() => setSubmitted(false), 5000);
             } else {
-                setError('Failed to send message. Please try again.');
+                const data = await response.json().catch(() => null);
+                setError(data?.error || 'Failed to send message. Please try again.');
             }
         } catch (error) {
             console.error('Error sending message:', error);
